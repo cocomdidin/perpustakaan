@@ -29,10 +29,10 @@ Route::middleware('auth')->group(function(){
         Route::resource('/anggota','AnggotaController');
         Route::get('/anggota-search','AnggotaController@search')->name('anggota.search');
 
-        Route::resource('/petugas','PetugasController');
     });
 
     Route::middleware('privilege:user')->group(function () {
+        Route::resource('/petugas','PetugasController');
         Route::resource('/transaksi','TransaksiController');
         Route::get('/transaksi-search','TransaksiController@search')->name('transaksi.search');
         Route::resource('/riwayat','HistoryController');

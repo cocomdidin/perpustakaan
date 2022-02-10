@@ -26,8 +26,8 @@
     <label>Jenis Kelamin</label>
     <select name="jenis_kelamin" class="form-control">
         <option selected disabled>-- Pilih Jenis Kelamin -- </option>
-        <option value="{{ $anggota->jenis_kelamin == 'pria' ? 'selected' : '' }}"> Pria</option>
-        <option value="{{ $anggota->jenis_kelamin == 'wanita' ? 'selected' : ''}}"> Wanita</option>
+        <option @if($anggota->jenis_kelamin=='pria') selected @endif value="pria">Pria</option>
+        <option @if($anggota->jenis_kelamin=='wanita') selected @endif value="wanita">Wanita</option>
     </select>
 
 </div>
@@ -36,7 +36,7 @@
     <select name="user_id"  class="form-control">
         <option selected disabled>-- Pilih Petugas -- </option>
         @foreach ($users as $item)
-        <option value="{{ $item->id }}">{{ $item->level }}</option>
+        <option @if($anggota->user_id == $item->id) selected @endif value="{{ $item->id }}"> {{  $item->level }}</option>
         @endforeach
     </select>
 </div>

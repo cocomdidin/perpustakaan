@@ -191,10 +191,8 @@
                             <label for="">Jenis Kelamin</label>
                             <select name="jenis_kelamin" class="form-control">
                                 <option disabled selected>-- Pilih Jenis Kelamin -- </option>
-
-                                    <option value="pria">Pria</option>
-                                    <option value="wanita">Wanita</option>
-
+                                    <option @if(old('jenis_kelamin')=='pria') selected @endif value="pria">Pria</option>
+                                    <option @if(old('jenis_kelamin')=='wanita') selected @endif value="wanita">Wanita</option>
                             </select>
                             @error('jenis_kelamin')
                                 <span class="text-danger">{{ $message }}</span>
@@ -205,7 +203,7 @@
                             <select name="user_id" class="form-control">
                                 <option disabled selected>-- Pilih Petugas --</option>
                                 @foreach ($users as $item)
-                                <option value="{{ $item->id }}"> {{  $item->level }}</option>
+                                <option @if(old('user_id')==$item->id) selected @endif value="{{ $item->id }}"> {{  $item->level }}</option>
                                 @endforeach
                             </select>
                             @error('user_id')

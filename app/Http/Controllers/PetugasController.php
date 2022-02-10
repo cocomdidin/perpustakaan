@@ -75,17 +75,16 @@ class PetugasController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
-            
+
         ]);
-        
+
         $user = User::find($id);
         $user->update([
             'name' => $request->name ?? $user->name,
             'email' => $request->email ?? $user->email,
             'password' => Hash::make($request->password) ?? $user->password,
-            'level' => 'user',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
