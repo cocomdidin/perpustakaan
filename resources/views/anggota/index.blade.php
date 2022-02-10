@@ -11,16 +11,16 @@
                     <div class="col-md-6 mt-4 mb-3 d-flex justify-content-end">
                         <!-- Search form -->
                         <form  action="{{ route('anggota.search') }}" method="get" class="navbar-search navbar-search-light form-inline mr-sm-3 " id="navbar-search-main">
-          
+
                           <input type="text" placeholder="masukkan pencarian" class="form-control bg-white" name="q" id="q">
                          <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
-              
+
                       </form>
                   </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                       
+
                         <div class="card">
                             <!-- Card header -->
                             <div class="card-header border-0">
@@ -42,7 +42,7 @@
                                     </thead>
                                     <tbody class="list">
                                         @foreach ($anggota as $item)
-                                            
+
                                         <tr>
                                             <th scope="row">
                                                     <div class="media align-items-center">
@@ -60,18 +60,18 @@
                                                             <i class="bg-primary"></i>
                                                             <span class="status">{{ $item->jenis_kelamin }}</span>
                                                         </span>
-                                                    @else 
+                                                    @else
                                                         <span class="badge badge-dot mr-4">
                                                             <i class="bg-danger"></i>
                                                             <span class="status">{{ $item->jenis_kelamin }}</span>
                                                         </span>
                                                     @endif
-                                                    
+
                                                 </td>
                                                 <td>
                                                     {{ $item->jurusan }}
                                                 </td>
-                    
+
                                                 <td class="text-right">
                                                     <div class="dropdown">
                                                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -79,9 +79,9 @@
                                                         </a>
                                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                                             <button class="dropdown-item btn-detail" data-target="#detailAnggota" data-toggle="modal" data-id="{{ $item->id }}">Detail</button>
-                                                            
+
                                                             <button class="dropdown-item btn-edit" data-toggle="modal" data-target="#editAnggota" data-id="{{ $item->id }}">Edit</button>
-                                        
+
                                                             <form action="{{ route('anggota.destroy',$item->id) }}" method="post" id="delete{{ $item->id }}">
                                                                 @csrf
                                                                 @method('delete')
@@ -92,16 +92,16 @@
                                                 </td>
                                             </tr>
                                             @endforeach
-                                    
+
                                     </tbody>
-                                  
-                                   
+
+
                                 </table>
                             </div>
                             <!-- Card footer -->
                             <div class="card-footer py-4">
                                 <nav aria-label="...">
-                                    
+
                                     @if ($anggota->lastPage() != 1)
                                     <ul class="pagination justify-content-end mb-0">
                                             <li class="page-item disabled">
@@ -121,11 +121,11 @@
                                                     <span class="sr-only">Next</span>
                                                 </a>
                                             </li>
-                                    </ul> 
+                                    </ul>
                                     @endif
-                                    @if (count($anggota) == 0)     
-                                        <div class="text-center" colspan="4"> Tidak ada data!</div>    
-                                    @endif       
+                                    @if (count($anggota) == 0)
+                                        <div class="text-center" colspan="4"> Tidak ada data!</div>
+                                    @endif
                                 </nav>
                             </div>
                         </div>
@@ -133,7 +133,7 @@
                 </div>
             </div>
         </div>
-    </div>       
+    </div>
 @endsection
 
 
@@ -157,7 +157,7 @@
                             @error('nama')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
-                            
+
                         </div>
                         <div class="form-group">
                             <label for="">Nim</label>
@@ -191,10 +191,10 @@
                             <label for="">Jenis Kelamin</label>
                             <select name="jenis_kelamin" class="form-control">
                                 <option disabled selected>-- Pilih Jenis Kelamin -- </option>
-                               
+
                                     <option value="pria">Pria</option>
                                     <option value="wanita">Wanita</option>
-                                
+
                             </select>
                             @error('jenis_kelamin')
                                 <span class="text-danger">{{ $message }}</span>
@@ -232,7 +232,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">    
+                <div class="modal-body">
                 </div>
             </div>
         </div>
@@ -248,7 +248,7 @@
                     </button>
                 </div>
                 <div class="modal-body" >
-                   
+
                 </div>
             </div>
         </div>
@@ -285,12 +285,12 @@
 
                 let id = $(this).data('id');
                 $.ajax({
-                    url : `http://localhost:8000/anggota/${id}`,
+                    url : `/anggota/${id}`,
                     method:'GET',
                     success:function(data){
                         $('#detailAnggota').find('.modal-body').html(data);
                         $('#detailAnggota').show();
-                    
+
                     }
                 })
             })
@@ -300,7 +300,7 @@
 
                 let id = $(this).data('id');
                 $.ajax({
-                    url : `http://localhost:8000/anggota/${id}/edit`,
+                    url : `/anggota/${id}/edit`,
                     method : 'GET',
                     success: function(data){
 
@@ -310,7 +310,7 @@
                     }
                 })
             })
-            // session delete anggota 
+            // session delete anggota
             let success = $('.success').data('flash');
             if(success){
                 Swal.fire({
@@ -323,8 +323,8 @@
             }
 
             //cari anggota
-            let route = "{{ route('anggota.search') }}" 
-       
+            let route = "{{ route('anggota.search') }}"
+
 
         })
     </script>

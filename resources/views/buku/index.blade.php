@@ -311,7 +311,7 @@
                 let id = $(this).data('id');
 
                 $.ajax({
-                    url:`http://localhost:8000/buku/${id}`,
+                    url:`/buku/${id}`,
                     method:'GET',
                     success:function(data){
                         $('#detailBuku').find('.modal-body').html(data);
@@ -325,7 +325,7 @@
                 let id = $(this).data('id');
 
                 $.ajax({
-                    url:`http://localhost:8000/buku/${id}/edit`,
+                    url:`/buku/${id}/edit`,
                     method:'GET',
                     success:function(data){
                         $('#editBuku').find('.modal-body').html(data);

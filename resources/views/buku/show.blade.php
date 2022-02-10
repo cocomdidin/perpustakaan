@@ -3,7 +3,7 @@
     <div class="row g-0">
         <div class="col-md-4">
             @if ($buku->gambar)
-                <img width="150" height="150" @if($buku->gambar) src="{{ asset('Storage/'.$buku->gambar) }}" @endif />
+                <img width="150" height="150" @if($buku->gambar) src="{{ asset('storage/'.$buku->gambar) }}" @endif />
             @endif
         </div>
         <div class="col-md-8">

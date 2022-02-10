@@ -11,7 +11,7 @@
 
               <input type="text" placeholder="masukkan kode transaksi" class="form-control bg-white @error('q') is-invalid @enderror" name="q" autocomplete="off" autofocus>
              <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
-  
+
           </form>
       </div>
     </div>
@@ -56,7 +56,7 @@
                                         <td>
                                             {{-- echo '<img src="{{ $item->kode_transaksi }}/png;base64,' . DNS1D::getBarcodePNG('4', 'EAN13') . '" alt="barcode" width="100" height="100"   />'; --}}
                                                 <span class="status">{{ $item->kode_transaksi }}</span>
-                                            
+
                                         </td>
                                         <td>
                                             {{ $item->tgl_pinjam }}
@@ -70,13 +70,13 @@
                                                     <i class="bg-danger"></i>
                                                     <span>{{ $item->status }}</span>
                                                 </span>
-                                            @else 
+                                            @else
                                                 <span class="badge badge-dot mr-4">
                                                     <i class="bg-success"></i>
                                                     <span>{{ $item->status }}</span>
                                                 </span>
                                             @endif
-                                        
+
                                         </td>
 
                                         <td class="text-right">
@@ -88,12 +88,12 @@
                                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                                     <button class="dropdown-item btn-detail" data-target="#detailTransaksi" data-toggle="modal" data-id="{{ $item->id }}" >Detail</button>
 
-                                                    @if ($item->status == 'pinjam')  
+                                                    @if ($item->status == 'pinjam')
                                                         <button class="dropdown-item btn-edit" data-toggle="modal" data-target="#editTransaksi" data-id="{{ $item->id }}">Edit</button>
                                                     @endif
-                                                    
+
                                                     @if($item->status == 'kembali')
-                                                    
+
                                                         <form action="{{ route('transaksi.destroy', $item->id) }}" method="post"
                                                             id="delete{{ $item->id }}">
                                                             @csrf
@@ -169,7 +169,7 @@
             </div>
         </div>
      </div>
-    
+
     {{-- modal detail transaksi  --}}
     <div class="modal fade" id="detailTransaksi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -186,18 +186,18 @@
             </div>
         </div>
      </div>
-        
-    
+
+
 @endsection
 
 @push('script')
     <script>
 
-        // modal edit transaksi 
+        // modal edit transaksi
         $('.btn-edit').click(function(){
             let id = $(this).data('id');
             $.ajax({
-                url : `http://localhost:8000/transaksi/${id}/edit`,
+                url : `/transaksi/${id}/edit`,
                 method :'GET',
                 success:function(data){
                     $('#editTransaksi').find('.modal-body').html(data);
@@ -205,11 +205,11 @@
                 }
             });
         })
-        // modal detail transaksi 
+        // modal detail transaksi
         $('.btn-detail').click(function(){
             let id = $(this).data('id');
             $.ajax({
-                url : `http://localhost:8000/transaksi/${id}`,
+                url : `/transaksi/${id}`,
                 method :'GET',
                 success:function(data){
                     $('#detailTransaksi').find('.modal-body').html(data);
@@ -238,7 +238,7 @@
         $(document).ready(function(){
 
 
-           
+
             //session success dan berhasil hapus
             let success =  $('.success').data('flash');
             if (success) {
@@ -250,7 +250,7 @@
                     timer: 2000
                 });
             }
-            
+
             //session gagal meminjam
             let fail =  $('.fail').data('flash');
             if (fail) {

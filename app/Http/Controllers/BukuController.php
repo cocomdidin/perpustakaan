@@ -116,7 +116,7 @@ class BukuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $buku = Buku::find($id);
+        $buku = Buku::findOrFail($id);
 
         if ($request->hasFile('gambar')) {
             $file = $request->file('gambar');
