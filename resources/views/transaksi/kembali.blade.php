@@ -1,4 +1,4 @@
-<form action="{{ route('transaksi.update',$transaksi->id) }}" method="post">
+<form action="{{ route('transaksi.kembalikan',$transaksi->id) }}" method="post">
                 @csrf
                 @method('put')
                 <div class="form-group">
@@ -21,13 +21,13 @@
                         <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label>Tanggal Pinjam</label>
                     <input type="date" name="tgl_pinjam"class="form-control" value="{{ $transaksi->tgl_pinjam }}">
                     @error('tgl_pinjam')
                     <small class="text-danger">{{ $message }}</small>
                     @enderror
-                </div>
+                </div> --}}
                 <div class="form-group">
                     <label>Tanggal Kembali</label>
                     <input type="date" name="tgl_kembali"class="form-control" value="{{ $transaksi->tgl_kembali }}">
@@ -52,7 +52,7 @@
 
                 <div class="float-right">
 
-                    <button type="submit" class="btn btn-primary">update</button>
+                    <button type="submit" class="btn btn-primary">Kembalikan</button>
                 </div>
                 </form>
 

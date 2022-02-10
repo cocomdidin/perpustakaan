@@ -27,7 +27,7 @@
                     </div>
                     <!-- Light table -->
                     <div class="table-responsive">
-                        <table class="table align-items-center table-flush">
+                        <table class="table align-items-center table-flush" style="min-height: 166px;">
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col" class="sort" data-sort="Nama">Nama</th>
@@ -90,6 +90,7 @@
 
                                                     @if ($item->status == 'pinjam')
                                                         <button class="dropdown-item btn-edit" data-toggle="modal" data-target="#editTransaksi" data-id="{{ $item->id }}">Edit</button>
+                                                        <button class="dropdown-item btn-kembalikan" data-toggle="modal" data-target="#kembaliTransaksi" data-id="{{ $item->id }}">Kembalikan</button>
                                                     @endif
 
                                                     @if($item->status == 'kembali')
@@ -153,6 +154,23 @@
 
 @section('modal')
 
+     {{-- modal kembalikan buku --}}
+     <div class="modal fade" id="kembaliTransaksi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content  mt-5">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Kembalikan Buku</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+            </div>
+        </div>
+     </div>
+
      {{-- modal edit transaksi  --}}
      <div class="modal fade" id="editTransaksi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -192,6 +210,19 @@
 
 @push('script')
     <script>
+
+        // modal kembalikan buku
+        $('.btn-kembalikan').click(function(){
+            let id = $(this).data('id');
+            $.ajax({
+                url : `/transaksi/${id}/kembali`,
+                method :'GET',
+                success:function(data){
+                    $('#kembaliTransaksi').find('.modal-body').html(data);
+                    $('#kembaliTransaksi').show();
+                }
+            });
+        })
 
         // modal edit transaksi
         $('.btn-edit').click(function(){

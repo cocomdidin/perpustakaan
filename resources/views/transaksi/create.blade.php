@@ -22,7 +22,7 @@
                     <select name="buku_id" class="form-control">
                         <option disabled selected>-- Pilih Buku --</option>
                         @foreach ($buku as $item)
-                        <option value="{{ $item->id }}">{{ $item->judul }}</option>
+                        <option @if(old('buku_id') == $item->id) selected @endif value="{{ $item->id }}">{{ $item->judul }}</option>
                         @endforeach
                     </select>
                     @error('buku_id')
@@ -55,6 +55,6 @@
             </div>
         </div>
     </div>
-</div>    
+</div>
 @endsection
 

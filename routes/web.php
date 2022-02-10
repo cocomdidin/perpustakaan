@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function(){
 
     Route::middleware('privilege:user')->group(function () {
         Route::resource('/petugas','PetugasController');
+        Route::get('/transaksi/{id}/kembali','TransaksiController@kembali')->name('transaksi.kembali');
+        Route::put('/transaksi/{id}/kembalikan','TransaksiController@kembalikan')->name('transaksi.kembalikan');
         Route::resource('/transaksi','TransaksiController');
         Route::get('/transaksi-search','TransaksiController@search')->name('transaksi.search');
         Route::resource('/riwayat','HistoryController');
