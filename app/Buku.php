@@ -9,7 +9,8 @@ class Buku extends Model
     protected $table = 'buku';
 
     protected $guarded = [];
-    
+
+    protected $perPage = 5;
 
     public function transaksi(){
 

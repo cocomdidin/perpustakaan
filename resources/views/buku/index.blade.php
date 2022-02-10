@@ -10,7 +10,7 @@
 
                 <input type="text" placeholder="masukkan pencarian" class="form-control bg-white @error('q') is-invalid @enderror" name="q" autocomplete="off" autofocus>
                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
-    
+
             </form>
         </div>
         <div class="col-md-12">
@@ -26,6 +26,7 @@
                     <table class="table align-items-center table-flush">
                         <thead class="thead-light">
                             <tr>
+                                <th>No</th>
                                 <th scope="col" class="sort" data-sort="Judul">Judul</th>
                                 <th scope="col" class="sort" data-sort="Penulis">Penulis</th>
                                 <th scope="col" class="sort" data-sort="Penerbit">Penerbit</th>
@@ -34,9 +35,10 @@
                             </tr>
                         </thead>
                         <tbody class="list">
-                            @foreach ($buku as $item)
+                            @foreach ($buku as $key => $item)
 
                                 <tr>
+                                    <td>{{ $buku->firstItem() + $key }}</td>
                                     <th scope="row">
                                         <div class="media align-items-center">
                                             <div class="media-body">
@@ -67,7 +69,7 @@
                                                 <button class="dropdown-item btn-detail" data-target="#detailBuku" data-toggle="modal" data-id="{{ $item->id }}" >Detail</button>
 
                                                 <button class="dropdown-item btn-edit" data-toggle="modal" data-target="#editBuku" data-id="{{ $item->id }}">Edit</button>
-                            
+
                                                 <form action="{{ route('buku.destroy', $item->id) }}" method="post"
                                                     id="delete{{ $item->id }}">
                                                     @csrf
@@ -191,16 +193,16 @@
                             <label for="">Lokasi</label>
                            <select name="lokasi" class="form-control">
                                <option value="" disabled selected>-- Pilih Rak --</option>
-                               <option value="rak1">Rak 1</option>
-                               <option value="rak2">Rak 2</option>
-                               <option value="rak3">Rak 3</option>
+                               <option value="rak1" @if(old('lokasi')=='rak1') selected @endif >Rak 1</option>
+                               <option value="rak2" @if(old('lokasi')=='rak2') selected @endif >Rak 2</option>
+                               <option value="rak3" @if(old('lokasi')=='rak3') selected @endif >Rak 3</option>
                            </select>
                            @error('lokasi')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="form-group">
-    
+
                             <img width="150" height="150" />
                             <input type="file" name="gambar" id="" class="uploads form-control mt-2" value="{{ old('gambar') }}">
                             @error('gambar')
@@ -282,7 +284,7 @@
 
         //delete buku
         function deleteBuku(id) {
-            
+
             Swal.fire({
                 title: 'PERINGATAN!',
                 text: "Yakin ingin menghapus Buku?",
@@ -300,11 +302,14 @@
         }
 
         $(document).ready(function(){
+            @if($errors->any())
+                $('#tambahBuku').modal('show');
+            @endif
 
             //detail buku
             $('.btn-detail').on('click',function(){
                 let id = $(this).data('id');
-                
+
                 $.ajax({
                     url:`http://localhost:8000/buku/${id}`,
                     method:'GET',
@@ -318,7 +323,7 @@
              //edit buku
              $('.btn-edit').on('click',function(){
                 let id = $(this).data('id');
-                
+
                 $.ajax({
                     url:`http://localhost:8000/buku/${id}/edit`,
                     method:'GET',
@@ -328,11 +333,11 @@
                     }
                 })
             })
-            //session flash success 
+            //session flash success
             let success = $('.success').data('flash');
             if (success) {
                 Swal.fire({
-                    
+
                     position: 'center',
                     type: 'success',
                     title: success,
@@ -340,11 +345,11 @@
                     timer: 2000
                 })
             }
-            //session flash hapus 
+            //session flash hapus
             let hapus = $('.hapus').data('flash');
             if (hapus) {
                 Swal.fire({
-                    
+
                     position: 'center',
                     type: 'success',
                     title: hapus,

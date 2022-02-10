@@ -19,7 +19,7 @@ class BukuController extends Controller
     {
         return view('buku.index',[
             'title' => 'Daftar Buku',
-            'buku' => Buku::orderBy('penulis','asc')->paginate(4)
+            'buku' => Buku::orderBy('judul','asc')->paginate()
         ]);
     }
 
@@ -50,7 +50,7 @@ class BukuController extends Controller
             'jumlah_buku' => 'required',
             'lokasi' => 'required',
             // 'gambar' => 'required|image|mimes:jpg,jpeg,png,svg'
-        
+
         ],[
             'required' => 'atribute tidak boleh kosong',
             'unique' => 'atribute sudah terdaftar',
@@ -59,14 +59,8 @@ class BukuController extends Controller
             // 'mimes' => 'atribute harus format jpg,jpeg,png atau svg'
         ]);
 
-        //request file gambar jika ada tambahkan dan jika kosong
-        if ($request->hasFile('gambar')) {
-            $file = $request->file('gambar');
-            $fileName = $file->store('img/buku');
-        }
-        
         //insert to database buku
-       Buku::create([
+       $newBook = Buku::create([
             'judul' => $request->judul,
             'isbn' => $request->isbn ?? '',
             'penulis' => $request->penulis,
@@ -79,7 +73,13 @@ class BukuController extends Controller
             'created_at' => Carbon::now()
         ]);
 
-        //session success 
+        //request file gambar jika ada tambahkan dan jika kosong
+        if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $fileName = $file->store('img/buku');
+        }
+
+        //session success
         return redirect('buku')->with('success','buku berhasil ditambahkan');
     }
 
@@ -91,7 +91,7 @@ class BukuController extends Controller
      */
     public function show($id)
     {
-        $buku = Buku::find($id);
+        $buku = Buku::findOrFail($id);
         return view('buku.show',compact('buku'));
     }
 
@@ -115,7 +115,7 @@ class BukuController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
+    {
         $buku = Buku::find($id);
 
         if ($request->hasFile('gambar')) {
@@ -158,13 +158,12 @@ class BukuController extends Controller
     // pencarian
     public function search(Request $request){
 
-        $request->validate([
-            'q' => 'required'
-        ],[
-            'required' => 'atribute tidak boleh kosong'
-        ]);
         $cari = $request->q;
-        $buku = Buku::where('judul','LIKE',"%$cari%")->orWhere('penulis','LIKE',"%$cari%")->paginate();
+        if ($cari) {
+            $buku = Buku::where('judul','LIKE',"%$cari%")->orWhere('penulis','LIKE',"%$cari%")->paginate();
+        } else {
+            return redirect('buku');
+        }
 
         return view('buku.index',[
             'title' => 'Daftar Buku',

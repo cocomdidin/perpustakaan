@@ -23,15 +23,15 @@
     {{-- material dsign --}}
     <link rel="stylesheet" href="{{ asset('materialdesignicons.min.css') }}">
     {{-- <link rel="stylesheet" href="{{ asset('bootstrap.min.css') }}"> --}}
-   
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
 
 
     <body>
-        
-        
-    
+
+
+
         <!-- Sidenav -->
         <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
             <div class="scrollbar-inner">
@@ -45,10 +45,10 @@
                     <!-- Collapse -->
                 <div class="collapse navbar-collapse" id="sidenav-collapse-main">
                     <!-- Nav items -->
-                    
+
                     <ul class="navbar-nav">
-                        
-                        
+
+
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}"
                                 href="{{ route('dashboard') }}">
@@ -56,11 +56,11 @@
                                 <span class="nav-link-text">Dashboard</span>
                             </a>
                         </li>
-                        
-                    
+
+
                         @auth
-                        
-                        @if (Auth::user()->level == 'admin')  
+
+                        @if (Auth::user()->level == 'admin')
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('buku') ? 'active' : '' }}"
                                 href="{{ route('buku.index') }}">
@@ -77,7 +77,7 @@
                         </li>
                         @endif
                         @if (Auth::user()->level == 'admin' || Auth::user()->level == 'user')
-                            
+
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('transaksi') ? 'active' : '' }}"
                                 href="{{ route('transaksi.index') }}">
@@ -102,7 +102,7 @@
                         @endif
                         @endauth
                     </ul>
-                    
+
                 </div>
             </div>
         </div>
@@ -113,7 +113,7 @@
         <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                  
+
                     @auth
                     <ul class="navbar-nav align-items-center ml-md-auto ">
                         <li class="nav-item dropdown">
@@ -135,20 +135,20 @@
                                         <i class="ni ni-settings-gear-65"></i>
                                         <span>Settings</span>
                                     </a>
-                                    
-                                    
-                    
+
+
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                             document.getElementById('logout-form').submit();">
                                             <i class="ni ni-bold-right"></i> <span>{{ __('Logout') }}</span>
                                         </a>
-                                        
+
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
-                                        
-                                
+
+
                                 </div>
                             </li>
                         </ul>
@@ -164,14 +164,14 @@
                     @yield('content')
                     @yield('modal')
                 </div>
-                
-                
+
+
             </div>
         </div>
-        
-        
+
+
     </div>
-    
+
     <!-- Argon Scripts -->
     <!-- Core -->
     <script src="{{ asset('template') }}/vendor/jquery/dist/jquery.min.js"></script>
@@ -184,12 +184,12 @@
     <script src="{{ asset('template') }}/vendor/chart.js/dist/Chart.extension.js"></script>
     <!-- Argon JS -->
     <script src="{{ asset('template') }}/js/argon.js?v=1.2.0"></script>
-    
+
     {{-- sweet alert  --}}
     <script src="{{ asset('sweetalert2.min.js') }}"></script>
-    <script src="{{ asset('popper.js') }}"></script>
-    <script src="{{ asset('jquery.js') }}"></script>
-    <script src="{{ asset('moment.js') }}"></script>    
+    {{-- <script src="{{ asset('popper.js') }}"></script> --}}
+    {{-- <script src="{{ asset('jquery.js') }}"></script> --}}
+    <script src="{{ asset('moment.js') }}"></script>
 
     @stack('script')
 </body>

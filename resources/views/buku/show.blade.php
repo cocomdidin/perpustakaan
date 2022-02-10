@@ -10,10 +10,10 @@
             <div class="card-body">
                 <div class="card-text">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item"> {{ $buku->judul }}</li>  
-                        <li class="list-group-item">Penerbit : {{ $buku->penerbit }}</li>  
-                        <li class="list-group-item">Tahun : {{ $buku->tahun_terbit }}</li>  
-                        <li class="list-group-item">Stok : {{ $buku->jumlah_buku }}</li>  
+                        <li class="list-group-item"> {{ $buku->judul }}</li>
+                        <li class="list-group-item">Penerbit : {{ $buku->penerbit }}</li>
+                        <li class="list-group-item">Tahun : {{ $buku->tahun_terbit }}</li>
+                        <li class="list-group-item">Stok : {{ $buku->jumlah_buku }}</li>
                     </ul>
                 </div>
                 <div class="card-text text-right"><small class="text-muted">{{  $buku->penulis }}</small></div>
