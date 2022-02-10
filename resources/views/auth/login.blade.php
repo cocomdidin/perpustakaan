@@ -94,7 +94,7 @@
   <meta name="author" content="Creative Tim">
   <title>Perpustakaan</title>
   <!-- Favicon -->
-  <link rel="icon" href="{{ asset('template') }}/img/brand/favicon.png" type="image/png">
+  <link rel="icon" href="{{ asset('template') }}/img/brand/pngegg.png" type="image/png">
   <!-- Fonts -->
   {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"> --}}
   <!-- Icons -->
@@ -109,7 +109,7 @@
   <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light">
     <div class="container">
       <a class="navbar-brand" href="javascript:void(0)">
-        <img src="{{ asset('template') }}/img/brand/white.png">
+        {{-- <img src="{{ asset('template') }}/img/brand/pngegg.png"> --}}
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -119,7 +119,7 @@
           <div class="row">
             <div class="col-6 collapse-brand">
               <a href="dashboard.html">
-                <img src="../assets/img/brand/blue.png">
+                {{-- <img src="../assets/img/brand/pngegg.png"> --}}
               </a>
             </div>
             <div class="col-6 collapse-close">
@@ -143,7 +143,7 @@
           </li>
         </ul>
         <hr class="d-lg-none" />
-       
+
       </div>
     </div>
   </nav>
@@ -156,7 +156,7 @@
           <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-6 col-md-8 px-5">
               <h1 class="text-white">Welcome!</h1>
-              <p class="text-lead text-white">Use these awesome forms to login or create new account in your project for free.</p>
+              <h2 class="text-white">Sistem Perpustakaan MAN 3 Palembang</h2>
             </div>
           </div>
         </div>
@@ -172,7 +172,7 @@
       <div class="row justify-content-center">
         <div class="col-lg-5 col-md-7">
           <div class="card bg-secondary border-0 mb-0">
-            <div class="card-header bg-transparent pb-5">
+            {{-- <div class="card-header bg-transparent pb-5">
               <div class="text-muted text-center mt-2 mb-3"><small>Sign in with</small></div>
               <div class="btn-wrapper text-center">
                 <a href="#" class="btn btn-neutral btn-icon">
@@ -184,10 +184,10 @@
                   <span class="btn-inner--text">Google</span>
                 </a>
               </div>
-            </div>
+            </div> --}}
             <div class="card-body px-lg-5 py-lg-5">
               <div class="text-center text-muted mb-4">
-                <small>Or sign in with credentials</small>
+                <small>Sign in with credentials</small>
               </div>
               <form role="form" method="post" action="{{ route('login') }}">
                 @csrf
@@ -218,7 +218,7 @@
                 <div class="custom-control custom-control-alternative custom-checkbox">
                   <input class="custom-control-input" id="customCheckLogin" type="checkbox">
                   <label class="custom-control-label" for="customCheckLogin">
-                     
+
                     <span class="text-muted">Show password</span>
                   </label>
                 </div>
@@ -246,7 +246,7 @@
       <div class="row align-items-center justify-content-xl-between">
         <div class="col-xl-6">
           <div class="copyright text-center text-xl-left text-muted">
-            &copy; 2020 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+            &copy; {{ date('Y') }} <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
           </div>
         </div>
         <div class="col-xl-6">
@@ -264,10 +264,10 @@
               <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a>
             </li> --}}
             <li class="nav-item">
-                <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">Yuz</a>
+                {{-- <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">Yuz</a> --}}
               </li>
             <li class="nav-item">
-                <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a>
+                {{-- <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a> --}}
               </li>
           </ul>
           {{-- by Yuz --}}
@@ -289,7 +289,7 @@
 
             // show and hide password
             $('#customCheckLogin').on('click',function () {
-               
+
                if ($(this).is(':checked')) {
                    $('#password').attr('type','text');
                } else{

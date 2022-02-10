@@ -21,6 +21,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
 Route::middleware('auth')->group(function(){
     Route::middleware('privilege:admin')->group(function () {
         Route::resource('/buku','BukuController');

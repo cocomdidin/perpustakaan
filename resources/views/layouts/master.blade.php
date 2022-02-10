@@ -8,7 +8,7 @@
     <meta name="author" content="Creative Tim">
     <title>Perpustakaan</title>
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('template') }}/img/brand/favicon.png" type="image/png">
+    <link rel="icon" href="{{ asset('template') }}/img/brand/pngegg.png" type="image/png">
 
     <link rel="stylesheet" href="{{ asset('template') }}/vendor/nucleo/css/nucleo.css" type="text/css">
     <link rel="stylesheet" href="{{ asset('template') }}/vendor/@fortawesome/fontawesome-free/css/all.min.css"
@@ -38,7 +38,8 @@
                 <!-- Brand -->
                 <div class="sidenav-header  align-items-center">
                     <a class="navbar-brand" href="javascript:void(0)">
-                        <img src="{{ asset('template') }}/img/brand/blue.png" class="navbar-brand-img" alt="...">
+                        <img src="{{ asset('template') }}/img/brand/pngegg.png" class="navbar-brand-img" alt="...">
+                        <h1>MAN 3</h1>
                     </a>
                 </div>
                 <div class="navbar-inner">
