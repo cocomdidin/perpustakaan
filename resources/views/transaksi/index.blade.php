@@ -31,7 +31,7 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th scope="col" class="sort" data-sort="Nama">Nama</th>
-                                    <th scope="col" class="sort" data-sort="Nim">Nim</th>
+                                    <th scope="col" class="sort" data-sort="Nim">No Anggota</th>
                                     <th scope="col" class="sort" data-sort="Kode Transaksi">Kode Transaksi</th>
                                     <th scope="col" class="sort" data-sort="Tanggal Pinjam">Tanggal Pinjam</th>
                                     <th scope="col" class="sort" data-sort="Tanggal Kembali">Tanggal Kembali</th>

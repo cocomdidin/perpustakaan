@@ -11,8 +11,8 @@
                 <form action="{{ route('transaksi.store') }}" method="post">
                 @csrf
                 <div class="form-group">
-                    <label>NIM Mahasiswa</label>
-                    <input type="text" placeholder="masukkan nim" name="nim"class="form-control" autocomplete="off" value="{{ old('nim') }}">
+                    <label>No Anggota</label>
+                    <input type="text" placeholder="masukkan no anggota" name="nim"class="form-control" autocomplete="off" value="{{ old('nim') }}">
                     @error('nim')
                         <small class="text-danger">{{ $message }}</small>
                     @enderror

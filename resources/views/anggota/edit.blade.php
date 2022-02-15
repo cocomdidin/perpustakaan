@@ -6,7 +6,7 @@
     <input type="text" name="nama"  class="form-control" value="{{ $anggota->nama }}">
 </div>
 <div class="form-group">
-    <label>NIM</label>
+    <label>No Anggota</label>
     <input type="number" name="nim"  class="form-control" value="{{ $anggota->nim }}">
 </div>
 <div class="form-group">

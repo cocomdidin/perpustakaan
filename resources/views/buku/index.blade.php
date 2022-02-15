@@ -31,6 +31,8 @@
                                 <th scope="col" class="sort" data-sort="Penulis">Penulis</th>
                                 <th scope="col" class="sort" data-sort="Penerbit">Penerbit</th>
                                 <th scope="col" class="sort" data-sort="Tahun Terbit">Tahun Terbit</th>
+                                <th scope="col" class="sort" data-sort="Lokasi">Rak</th>
+                                <th scope="col" class="sort" data-sort="Jumlah Buku">Stok</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -50,13 +52,16 @@
                                         {{ $item->penulis }}
                                     </td>
                                     <td>
-                                        <span class="badge badge-dot mr-4">
-                                            <i class="bg-warning"></i>
-                                            <span class="status">{{ $item->penerbit }}</span>
-                                        </span>
+                                        {{ $item->penerbit }}
                                     </td>
                                     <td>
                                         {{ $item->tahun_terbit }}
+                                    </td>
+                                    <td>
+                                        {{ $item->lokasi }}
+                                    </td>
+                                    <td>
+                                        {{ $item->jumlah_buku }}
                                     </td>
 
                                     <td class="text-right">
@@ -293,7 +298,7 @@
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes',
-                cancelButtonText: 'Cancle',
+                cancelButtonText: 'Cancel',
             }).then((result) => {
                 if (result.value) {
                     $('#delete' + id).submit();

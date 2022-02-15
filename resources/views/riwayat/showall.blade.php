@@ -19,7 +19,7 @@
                     <thead class="thead-light">
                       <tr>
                         <th scope="col">Nama </th>
-                        <th scope="col">Nim</th>
+                        <th scope="col">No Anggota</th>
                         <th scope="col">Buku</th>
                         <th scope="col">Tanggal Pinjam</th>
                         <th scope="col">Tanggal Kembali</th>
@@ -28,7 +28,7 @@
                     </thead>
                     <tbody>
                         @foreach ($transaksi as $item)
-                            
+
                         <tr>
                             <th scope="row">
                               {{ $item->anggota->nama }}
@@ -51,13 +51,13 @@
                                       <i class="bg-success"></i>
                                   {{ $item->status }}
                                   </span>
-                              @else 
+                              @else
                                   <span class="badge badge-dot mr-4">
                                       <i class="bg-danger"></i>
                                       {{ $item->status }}
                                   </span>
                               @endif
-                              
+
                           </td>
                       </tr>
                       @endforeach

@@ -34,7 +34,7 @@
                                     <thead class="thead-light">
                                         <tr>
                                             <th scope="col" class="sort" data-sort="Judul">Nama</th>
-                                            <th scope="col" class="sort" data-sort="Penulis">NIM</th>
+                                            <th scope="col" class="sort" data-sort="Penulis">No Anggota</th>
                                             <th scope="col" class="sort" data-sort="Penerbit">Jenis Kelamin</th>
                                             <th scope="col" class="sort" data-sort="Tahun Terbit">Jurusan</th>
                                             <th scope="col"></th>
@@ -267,7 +267,7 @@
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes',
-                cancelButtonText: 'Cancle',
+                cancelButtonText: 'Cancel',
             }).then((result) => {
                 if (result.value) {
                     $('#delete' + id).submit();

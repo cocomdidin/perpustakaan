@@ -34,7 +34,7 @@ class TransaksiController extends Controller
     {
 
         return view('transaksi.create',[
-            'title' => 'Tambah Transaksi',
+            'title' => 'Tambah Transaksi Pinjam Buku',
             'buku' => Buku::orderBy('judul','asc')->get(),
 
         ]);
@@ -50,7 +50,7 @@ class TransaksiController extends Controller
     {
         $message = [
             'required' => 'atribute tidak boleh kosong',
-            'exists' => 'NIM tidak terdaftar',
+            'exists' => 'Nomor tidak terdaftar',
         ];
         $request->validate([
             'nim' => 'required|exists:anggota,nim',
