@@ -33,7 +33,7 @@
                                 <table class="table align-items-center table-flush">
                                     <thead class="thead-light">
                                         <tr>
-                                            <th scope="col" class="sort" data-sort="Judul">Nama</th>
+                                            <th scope="col" class ="sort" data-sort="Judul">Nama</th>
                                             <th scope="col" class="sort" data-sort="Penulis">No Anggota</th>
                                             <th scope="col" class="sort" data-sort="Penerbit">Jenis Kelamin</th>
                                             <th scope="col" class="sort" data-sort="Tahun Terbit">Kelas</th>
@@ -181,7 +181,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="">Jurusan</label>
+                            <label for="">Kelas</label>
                             <input type="text" name="jurusan"  class="form-control" value="{{ old('jurusan') }}">
                             @error('jurusan')
                                 <span class="text-danger">{{ $message }}</span>
