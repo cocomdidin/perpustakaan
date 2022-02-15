@@ -34,6 +34,9 @@ Route::middleware('auth')->group(function(){
 
     Route::middleware('privilege:user')->group(function () {
         Route::resource('/petugas','PetugasController');
+        Route::get('/kunjungan','KunjunganController@index')->name('kunjungan.index');
+        Route::post('/kunjungan','KunjunganController@store')->name('kunjungan.store');
+        Route::get('/kunjungan-search-anggota','KunjunganController@searchAnggota')->name('kunjungan.search.anggota');
         Route::get('/transaksi/{id}/kembali','TransaksiController@kembali')->name('transaksi.kembali');
         Route::put('/transaksi/{id}/kembalikan','TransaksiController@kembalikan')->name('transaksi.kembalikan');
         Route::resource('/transaksi','TransaksiController');

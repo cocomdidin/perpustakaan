@@ -36,7 +36,7 @@
                                             <th scope="col" class="sort" data-sort="Judul">Nama</th>
                                             <th scope="col" class="sort" data-sort="Penulis">No Anggota</th>
                                             <th scope="col" class="sort" data-sort="Penerbit">Jenis Kelamin</th>
-                                            <th scope="col" class="sort" data-sort="Tahun Terbit">Jurusan</th>
+                                            <th scope="col" class="sort" data-sort="Tahun Terbit">Kelas</th>
                                             <th scope="col"></th>
                                         </tr>
                                     </thead>

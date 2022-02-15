@@ -19,7 +19,7 @@
     <input type="date" name="tgl_lahir"  class="form-control" value="{{ $anggota->tgl_lahir }}">
 </div>
 <div class="form-group">
-    <label>Jurusan</label>
+    <label>Kelas</label>
     <input type="text" name="jurusan"  class="form-control" value="{{ $anggota->jurusan }}">
 </div>
 <div class="form-group">

@@ -198,9 +198,9 @@
                             <label for="">Lokasi</label>
                            <select name="lokasi" class="form-control">
                                <option value="" disabled selected>-- Pilih Rak --</option>
-                               <option value="rak1" @if(old('lokasi')=='rak1') selected @endif >Rak 1</option>
-                               <option value="rak2" @if(old('lokasi')=='rak2') selected @endif >Rak 2</option>
-                               <option value="rak3" @if(old('lokasi')=='rak3') selected @endif >Rak 3</option>
+                               <option value="001" @if(old('lokasi')=='001') selected @endif >001</option>
+                               <option value="002" @if(old('lokasi')=='002') selected @endif >002</option>
+                               <option value="003" @if(old('lokasi')=='003') selected @endif >003</option>
                            </select>
                            @error('lokasi')
                                 <span class="text-danger">{{ $message }}</span>

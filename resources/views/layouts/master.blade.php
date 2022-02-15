@@ -80,6 +80,13 @@
                         @if (Auth::user()->level == 'admin' || Auth::user()->level == 'user')
 
                         <li class="nav-item">
+                            <a class="nav-link {{ request()->is('kunjungan') ? 'active' : '' }}"
+                                href="{{ route('kunjungan.index') }}">
+                                <i class="ni ni-user-run text-red"></i>
+                                <span class="nav-link-text">Kunjungan</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {{ request()->is('transaksi') ? 'active' : '' }}"
                                 href="{{ route('transaksi.index') }}">
                                 <i class="ni ni-ruler-pencil text-red"></i>

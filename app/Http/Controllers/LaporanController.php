@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Buku;
 use App\Exports\BukuExport;
 use App\Exports\TransaksiExport;
+use App\Kunjungan;
 use App\Transaksi;
 
 use Illuminate\Http\Request;
@@ -14,7 +15,8 @@ class LaporanController extends Controller
 {
     public function index()
     {
-        return view('laporan.index');
+        $kunjungan = Kunjungan::paginate();
+        return view('laporan.index', ['kunjungan' => $kunjungan]);
     }
 
     public function bukuPdf(){
@@ -32,7 +34,7 @@ class LaporanController extends Controller
     public function bukuExcel(){
 
         return \Excel::download(new BukuExport,'laporan_buku.xlsx');
-       
+
     }
 
     public function transaksiPdf(){

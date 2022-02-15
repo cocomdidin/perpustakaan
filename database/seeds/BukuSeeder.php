@@ -21,7 +21,7 @@ class BukuSeeder extends Seeder
                 'penerbit' => 'Shonen Jump',
                 'tahun_terbit' => '1995',
                 'jumlah_buku' => '8',
-                'lokasi' => 'rak1',
+                'lokasi' => '001',
                 'gambar' => 'naruto.jpg',
                 'created_at' => Carbon::now()
             ],
@@ -32,7 +32,7 @@ class BukuSeeder extends Seeder
                 'penerbit' => 'Gramedia',
                 'tahun_terbit' => '1994',
                 'jumlah_buku' => '10',
-                'lokasi' => 'rak2',
+                'lokasi' => '002',
                 'gambar' => 'onepiece.jpg',
                 'created_at' => Carbon::now()
             ]

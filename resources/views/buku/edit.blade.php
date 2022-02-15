@@ -25,9 +25,9 @@
     <label for="">Lokasi</label>
     <select name="lokasi" class="form-control">
         <option disabled selected>--pilih rak --</option>
-        <option value="rak1" @if($buku->lokasi=='rak1') selected @endif >Rak 1</option>
-        <option value="rak2" @if($buku->lokasi=='rak2') selected @endif >Rak 2</option>
-        <option value="rak3" @if($buku->lokasi=='rak3') selected @endif >Rak 3</option>
+        <option value="001" @if($buku->lokasi=='001') selected @endif >001</option>
+        <option value="002" @if($buku->lokasi=='002') selected @endif >002</option>
+        <option value="003" @if($buku->lokasi=='003') selected @endif >003</option>
     </select>
 </div>
 <div class="form-group">

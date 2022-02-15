@@ -16,7 +16,7 @@
     <input type="text"  class="form-control" value="{{ $anggota->tgl_lahir }}">
 </div>
 <div class="form-group">
-    <label>Jurusan</label>
+    <label>Kelas</label>
     <input type="text"   class="form-control" value="{{ $anggota->jurusan }}">
 </div>
 <div class="form-group">

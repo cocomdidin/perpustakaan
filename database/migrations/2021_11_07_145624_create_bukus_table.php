@@ -22,7 +22,7 @@ class CreateBukusTable extends Migration
             $table->integer('tahun_terbit');
             $table->integer('jumlah_buku');
             $table->text('deskripsi')->nullable();
-            $table->enum('lokasi',['rak1','rak2','rak3'])->nullable();
+            $table->text('lokasi')->nullable();
             $table->string('gambar')->nullable();
             $table->timestamps();
         });
