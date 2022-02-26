@@ -162,15 +162,20 @@ class TransaksiController extends Controller
     public function search(Request $request){
 
 
-        $request->validate([
-            'q' => 'required'
-        ]);
-        //cari dengan kode_transaksi
-        $cari = $request->q;
-
         $title = 'Daftar Transaksi';
 
-        $transaksi = Transaksi::where('kode_transaksi','LIKE',"%$cari%")->paginate();
+
+
+        // $request->validate([
+        //     'q' => 'required'
+        // ]);
+        //cari dengan kode_transaksi
+        $cari = $request->input('q');
+            if ($cari) {
+                $transaksi = Transaksi::where('kode_transaksi','LIKE',"%$cari%")->paginate();
+            } else {
+                $transaksi = Transaksi::paginate();
+            }
 
         return view('transaksi.index',compact('title','transaksi'));
 
