@@ -154,35 +154,35 @@
                                     <label for="">Kode</label>
                                     <input type="text" name="kode" value="{{ old('kode') }}" class="form-control">
                                     @error('kode')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="">ISBN</label>
                                     <input type="text" name="isbn" value="{{ old('isbn') }}" class="form-control">
                                     @error('isbn')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="">Judul</label>
                                     <input type="text" name="judul" value="{{ old('judul') }}" class="form-control">
                                     @error('judul')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="">Edisi</label>
                                     <input type="text" name="edisi" value="{{ old('edisi') }}" class="form-control">
                                     @error('edisi')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="">Pengarang</label>
                                     <input type="text" name="penulis" value="{{ old('penulis') }}" class="form-control">
                                     @error('penulis')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="form-group">
@@ -190,7 +190,7 @@
                                     <img width="150" height="150" />
                                     <input type="file" name="gambar" id="" class="uploads form-control mt-2" value="{{ old('gambar') }}">
                                     @error('gambar')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                             </div>
@@ -199,33 +199,33 @@
                                     <label for="">Penerbit</label>
                                     <input type="text" name="penerbit" value="{{ old('penerbit') }}" class="form-control">
                                     @error('penerbit')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="">Tahun Terbit</label>
                                     <input type="number" min="0" name="tahun_terbit" value="{{ old('tahun_terbit') }}" class="form-control">
                                     @error('tahun_terbit')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="">Stock</label>
                                     <input type="number" min="0" name="jumlah_buku" value="{{ old('jumlah_buku') }}" class="form-control">
                                     @error('jumlah_buku')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="">Lokasi</label>
                                     <select name="lokasi" class="form-control">
                                         <option value="" disabled selected>-- Pilih Rak --</option>
-                                        <option value="001" @if(old('lokasi')=='001') selected @endif >001</option>
-                                        <option value="002" @if(old('lokasi')=='002') selected @endif >002</option>
-                                        <option value="003" @if(old('lokasi')=='003') selected @endif >003</option>
+                                        @foreach($rak as $rk)
+                                            <option @if(old('lokasi')==$rk->id) selected @endif value="{{ $rk->id }}">{{ $rk->nama }}</option>
+                                        @endforeach
                                     </select>
                                     @error('lokasi')
-                                            <span class="text-danger">{{ $message }}</span>
+                                            <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="form-group">
