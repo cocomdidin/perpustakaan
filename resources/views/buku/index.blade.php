@@ -248,7 +248,7 @@
 
     {{-- Modal Detail Buku  --}}
     <div class="modal fade" id="detailBuku" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content  mt-5">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Detail Buku</h5>
@@ -264,7 +264,7 @@
 
         {{-- Modal Edit Buku  --}}
     <div class="modal fade" id="editBuku" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog  mt-5">
+        <div class="modal-dialog modal-xl mt-5">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Edit Buku</h5>

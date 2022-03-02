@@ -110,7 +110,8 @@ class BukuController extends Controller
     public function edit($id)
     {
         $buku = Buku::find($id);
-        return view('buku.edit',compact('buku'));
+        $rak = Rak::all();
+        return view('buku.edit',compact(['buku','rak']));
     }
 
     /**
