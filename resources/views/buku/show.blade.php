@@ -1,8 +1,8 @@
 
 <div class="card mb-3">
-    <div class="row g-0">
-        <div class="col-md-4">
-            <img class="border border-secondary rounded" width="150" height="150" src="{{ asset($buku->gambar ? 'storage/'.$buku->gambar : 'assets/img/system/Book-icon.png') }}" />
+    <div class="row">
+        <div class="col-md-4 pl-3">
+            <img class="border border-secondary rounded" width="100%" src="{{ asset($buku->gambar ? 'storage/'.$buku->gambar : 'assets/img/system/Book-icon.png') }}" />
         </div>
         <div class="col-md-8">
             <div class="card-body">
