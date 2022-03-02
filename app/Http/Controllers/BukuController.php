@@ -63,27 +63,27 @@ class BukuController extends Controller
             'mimes' => 'Harus format jpg,jpeg,png atau svg'
         ]);
 
+        //request file gambar jika ada tambahkan dan jika kosong
+        if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $fileName = $file->store('img/buku');
+        }
+
         //insert to database buku
-       $newBook = Buku::create([
+        Buku::create([
             'kode' => $request->kode,
-            'isbn' => $request->isbn ?? '',
+            'isbn' => $request->isbn,
             'judul' => $request->judul,
             'edisi' => $request->edisi,
             'penulis' => $request->penulis,
             'penerbit' => $request->penerbit,
             'tahun_terbit' => $request->tahun_terbit,
             'jumlah_buku' => $request->jumlah_buku,
-            'deskripsi' => $request->deskripsi ?? '',
+            'deskripsi' => $request->deskripsi,
             'rak_id' => $request->lokasi,
             'gambar' => $fileName ?? '',
             'created_at' => Carbon::now()
         ]);
-
-        //request file gambar jika ada tambahkan dan jika kosong
-        if ($request->hasFile('gambar')) {
-            $file = $request->file('gambar');
-            $fileName = $file->store('img/buku');
-        }
 
         //session success
         return redirect('buku')->with('success','buku berhasil ditambahkan');
@@ -109,9 +109,10 @@ class BukuController extends Controller
      */
     public function edit($id)
     {
+        $title = 'Edit Buku';
         $buku = Buku::find($id);
         $rak = Rak::all();
-        return view('buku.edit',compact(['buku','rak']));
+        return view('buku.formEdit',compact(['title','buku','rak']));
     }
 
     /**
@@ -123,27 +124,49 @@ class BukuController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'kode' => 'required|max:50|unique:buku,kode,'.$id,
+            'isbn' => 'required|unique:buku,isbn,'.$id,
+            'judul' => 'required|max:255|unique:buku,judul,'.$id,
+            'edisi' => 'required',
+            'penulis' => 'required',
+            'penerbit' => 'required',
+            'tahun_terbit' => 'required',
+            'jumlah_buku' => 'required',
+            'lokasi' => 'required',
+            'gambar' => 'nullable|image|mimes:jpg,jpeg,png,svg'
+
+        ],[
+            'required' => 'Tidak boleh kosong',
+            'unique' => 'Sudah digunakan',
+            'max' => 'Karakter max 255',
+            'image' => 'Harus gambar',
+            'mimes' => 'Harus format jpg,jpeg,png atau svg'
+        ]);
+
         $buku = Buku::findOrFail($id);
 
         if ($request->hasFile('gambar')) {
             $file = $request->file('gambar');
             Storage::delete($buku->gambar);
             $fileName = $file->store('img/buku');
-        }else{
-            $fileName = $buku->gambar;
         }
 
         $buku->update([
+            'kode' => $request->kode ?? $buku->kode,
             'judul' => $request->judul ?? $buku->judul,
+            'edisi' => $request->edisi ?? $buku->edisi,
             'isbn' => $request->isbn ?? $buku->isbn,
             'penulis' => $request->penulis ?? $buku->penulis,
             'penerbit' => $request->penerbit ?? $buku->penerbit,
             'tahun_terbit' => $request->tahun_terbit ?? $buku->tahun_terbit,
             'jumlah_buku' => $request->jumlah_buku ?? $buku->jumlah_buku,
-            'lokasi' => $request->lokasi ?? $buku->lokasi,
-            'gambar' => $fileName ?? $request->file('gambar'),
+            'rak_id' => $request->lokasi ?? $buku->lokasi,
+            'gambar' => $fileName ?? $buku->gambar,
+            'deskripsi' => $request->deskripsi ?? $buku->deskripsi,
             'updated_at' => Carbon::now()
         ]);
+
         return redirect('buku')->with('success','buku berhasil diupate');
     }
 
