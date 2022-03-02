@@ -73,7 +73,8 @@
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                                 <button class="dropdown-item btn-detail" data-target="#detailBuku" data-toggle="modal" data-id="{{ $item->id }}" >Detail</button>
 
-                                                <button class="dropdown-item btn-edit" data-toggle="modal" data-target="#editBuku" data-id="{{ $item->id }}">Edit</button>
+                                                {{-- <button id="btnEdit{{ $item->id }}" class="dropdown-item btn-edit" data-toggle="modal" data-target="#editBuku" data-id="{{ $item->id }}">Edit</button> --}}
+                                                <a class="dropdown-item btn-edit" href="{{ route('buku.edit', $item->id) }}">Edit</a>
 
                                                 <form action="{{ route('buku.destroy', $item->id) }}" method="post"
                                                     id="delete{{ $item->id }}">
@@ -278,8 +279,6 @@
         </div>
      </div>
 
-
-
 @endsection
 
 @push('script')
@@ -326,7 +325,7 @@
 
         $(document).ready(function(){
             @if($errors->any())
-                $('#tambahBuku').modal('show');
+                    $('#tambahBuku').modal('show');
             @endif
 
             //detail buku
