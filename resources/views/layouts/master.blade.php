@@ -199,6 +199,20 @@
     {{-- <script src="{{ asset('jquery.js') }}"></script> --}}
     <script src="{{ asset('moment.js') }}"></script>
 
+    <script>
+        // otomatis set csrf_token dan loader saat menggunakan ajax
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            error: function (xhr, status, error) {
+                if (xhr.status == 410) {
+                    // page expired
+                    location.reload();
+                }
+            }
+        });
+    </script>
     @stack('script')
 </body>
 
