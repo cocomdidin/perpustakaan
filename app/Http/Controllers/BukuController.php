@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Buku;
+use App\Rak;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +20,8 @@ class BukuController extends Controller
     {
         return view('buku.index',[
             'title' => 'Daftar Buku',
-            'buku' => Buku::orderBy('judul','asc')->paginate()
+            'buku' => Buku::orderBy('judul','asc')->paginate(),
+            'rak' => Rak::all()
         ]);
     }
 
