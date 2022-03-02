@@ -13,7 +13,10 @@ class Buku extends Model
     protected $perPage = 5;
 
     public function transaksi(){
-
         return $this->hasMany(Transaksi::class);
+    }
+
+    public function rak(){
+        return $this->belongsTo(Rak::class);
     }
 }

@@ -2,15 +2,14 @@
 <div class="card mb-3">
     <div class="row g-0">
         <div class="col-md-4">
-            @if ($buku->gambar)
-                <img width="150" height="150" @if($buku->gambar) src="{{ asset('storage/'.$buku->gambar) }}" @endif />
-            @endif
+            <img class="border border-secondary rounded" width="150" height="150" src="{{ asset($buku->gambar ? 'storage/'.$buku->gambar : 'assets/img/system/Book-icon.png') }}" />
         </div>
         <div class="col-md-8">
             <div class="card-body">
                 <div class="card-text">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"> {{ $buku->judul }}</li>
+                        <li class="list-group-item">Edisi : {{ $buku->edisi }}</li>
                         <li class="list-group-item">Penerbit : {{ $buku->penerbit }}</li>
                         <li class="list-group-item">Tahun : {{ $buku->tahun_terbit }}</li>
                         <li class="list-group-item">Stok : {{ $buku->jumlah_buku }}</li>

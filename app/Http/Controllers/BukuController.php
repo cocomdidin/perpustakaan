@@ -44,7 +44,7 @@ class BukuController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kode' => 'required|max:50|unique:kode',
+            'kode' => 'required|max:50|unique:buku',
             'isbn' => 'required|unique:buku',
             'judul' => 'required|max:255|unique:buku',
             'edisi' => 'required',
@@ -74,7 +74,7 @@ class BukuController extends Controller
             'tahun_terbit' => $request->tahun_terbit,
             'jumlah_buku' => $request->jumlah_buku,
             'deskripsi' => $request->deskripsi ?? '',
-            'lokasi' => $request->lokasi ?? '',
+            'rak_id' => $request->lokasi,
             'gambar' => $fileName ?? '',
             'created_at' => Carbon::now()
         ]);

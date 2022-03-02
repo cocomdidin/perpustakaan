@@ -23,7 +23,7 @@
                 </div>
                 <!-- Light table -->
                 <div class="table-responsive">
-                    <table class="table align-items-center table-flush">
+                    <table class="table align-items-center table-flush" style="min-height: 150px">
                         <thead class="thead-light">
                             <tr>
                                 <th>No</th>
@@ -58,7 +58,7 @@
                                         {{ $item->tahun_terbit }}
                                     </td>
                                     <td>
-                                        {{ $item->lokasi }}
+                                        {{ $item->rak->nama }}
                                     </td>
                                     <td>
                                         {{ $item->jumlah_buku }}
@@ -66,7 +66,7 @@
 
                                     <td class="text-right">
                                         <div class="dropdown">
-                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="modal"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="fas fa-ellipsis-v"></i>
                                             </a>
