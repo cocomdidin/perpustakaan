@@ -135,7 +135,7 @@
 
      {{-- Modal Tambah Buku --}}
      <div class="modal fade" id="tambahBuku" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog  mt-5">
+        <div class="modal-dialog modal-xl  mt-5">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Tambah Buku</h5>
@@ -148,71 +148,91 @@
                     <form action="{{ route('buku.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('post')
-                        <div class="form-group">
-                            <label for="">Judul</label>
-                            <input type="text" name="judul" value="{{ old('judul') }}" class="form-control">
-                            @error('judul')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="">ISBN</label>
-                            <input type="text" name="isbn" value="{{ old('isbn') }}" class="form-control">
-                            @error('isbn')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="">Penulis</label>
-                            <input type="text" name="penulis" value="{{ old('penulis') }}" class="form-control">
-                            @error('penulis')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="">Penerbit</label>
-                            <input type="text" name="penerbit" value="{{ old('penerbit') }}" class="form-control">
-                            @error('penerbit')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="">Tahun Terbit</label>
-                            <input type="number" min="0" name="tahun_terbit" value="{{ old('tahun_terbit') }}" class="form-control">
-                            @error('tahun_terbit')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="">Stock</label>
-                            <input type="number" min="0" name="jumlah_buku" value="{{ old('jumlah_buku') }}" class="form-control">
-                            @error('jumlah_buku')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="">Deskripsi</label>
-                            <textarea name="deskripsi" value="{{ old('deskripsi') }}" class="form-control"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Lokasi</label>
-                           <select name="lokasi" class="form-control">
-                               <option value="" disabled selected>-- Pilih Rak --</option>
-                               <option value="001" @if(old('lokasi')=='001') selected @endif >001</option>
-                               <option value="002" @if(old('lokasi')=='002') selected @endif >002</option>
-                               <option value="003" @if(old('lokasi')=='003') selected @endif >003</option>
-                           </select>
-                           @error('lokasi')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="">Kode</label>
+                                    <input type="text" name="kode" value="{{ old('kode') }}" class="form-control">
+                                    @error('kode')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="">ISBN</label>
+                                    <input type="text" name="isbn" value="{{ old('isbn') }}" class="form-control">
+                                    @error('isbn')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Judul</label>
+                                    <input type="text" name="judul" value="{{ old('judul') }}" class="form-control">
+                                    @error('judul')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Edisi</label>
+                                    <input type="text" name="edisi" value="{{ old('edisi') }}" class="form-control">
+                                    @error('edisi')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Pengarang</label>
+                                    <input type="text" name="penulis" value="{{ old('penulis') }}" class="form-control">
+                                    @error('penulis')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
 
-                            <img width="150" height="150" />
-                            <input type="file" name="gambar" id="" class="uploads form-control mt-2" value="{{ old('gambar') }}">
-                            @error('gambar')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
+                                    <img width="150" height="150" />
+                                    <input type="file" name="gambar" id="" class="uploads form-control mt-2" value="{{ old('gambar') }}">
+                                    @error('gambar')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="">Penerbit</label>
+                                    <input type="text" name="penerbit" value="{{ old('penerbit') }}" class="form-control">
+                                    @error('penerbit')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Tahun Terbit</label>
+                                    <input type="number" min="0" name="tahun_terbit" value="{{ old('tahun_terbit') }}" class="form-control">
+                                    @error('tahun_terbit')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Stock</label>
+                                    <input type="number" min="0" name="jumlah_buku" value="{{ old('jumlah_buku') }}" class="form-control">
+                                    @error('jumlah_buku')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Lokasi</label>
+                                    <select name="lokasi" class="form-control">
+                                        <option value="" disabled selected>-- Pilih Rak --</option>
+                                        <option value="001" @if(old('lokasi')=='001') selected @endif >001</option>
+                                        <option value="002" @if(old('lokasi')=='002') selected @endif >002</option>
+                                        <option value="003" @if(old('lokasi')=='003') selected @endif >003</option>
+                                    </select>
+                                    @error('lokasi')
+                                            <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Deskripsi</label>
+                                    <textarea name="deskripsi" rows="4" value="{{ old('deskripsi') }}" class="form-control"></textarea>
+                                </div>
+                            </div>
                         </div>
                         <div class="float-right">
                             <button type="submit" class="btn btn-primary ">simpan</button>
@@ -237,7 +257,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    ...
                 </div>
             </div>
         </div>
@@ -254,7 +273,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    ...
                 </div>
             </div>
         </div>

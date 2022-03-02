@@ -34,15 +34,19 @@ Route::middleware('auth')->group(function(){
 
     Route::middleware('privilege:user')->group(function () {
         Route::resource('/petugas','PetugasController');
+
         Route::get('/kunjungan','KunjunganController@index')->name('kunjungan.index');
         Route::post('/kunjungan','KunjunganController@store')->name('kunjungan.store');
         Route::get('/kunjungan-search-anggota','KunjunganController@searchAnggota')->name('kunjungan.search.anggota');
+
         Route::get('/transaksi/{id}/kembali','TransaksiController@kembali')->name('transaksi.kembali');
         Route::put('/transaksi/{id}/kembalikan','TransaksiController@kembalikan')->name('transaksi.kembalikan');
         Route::resource('/transaksi','TransaksiController');
         Route::get('/transaksi-search','TransaksiController@search')->name('transaksi.search');
+
         Route::resource('/riwayat','HistoryController');
         Route::get('/all','HistoryController@showAll')->name('riwayat.all');
+
         Route::get('/laporan','LaporanController@index')->name('laporan.index');
         Route::get('/buku-pdf','LaporanController@bukuPdf')->name('buku.pdf');
         Route::get('/buku-excel','LaporanController@bukuExcel')->name('buku.excel');
