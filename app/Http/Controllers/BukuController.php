@@ -190,14 +190,20 @@ class BukuController extends Controller
 
         $cari = $request->q;
         if ($cari) {
-            $buku = Buku::where('judul','LIKE',"%$cari%")->orWhere('penulis','LIKE',"%$cari%")->paginate();
+            $buku = Buku::where('judul','LIKE',"%$cari%")
+            ->orWhere('isbn','LIKE',"%$cari%")
+            ->orWhere('kode','LIKE',"%$cari%")
+            ->orWhere('penulis','LIKE',"%$cari%")
+            ->paginate();
         } else {
             return redirect('buku');
         }
 
         return view('buku.index',[
             'title' => 'Daftar Buku',
-            'buku' => $buku
+            'buku' => $buku,
+            'rak' => Rak::all(),
+            'cari' => $cari
         ]);
     }
 }
