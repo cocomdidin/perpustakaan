@@ -16,9 +16,12 @@ class Level
      */
     public function handle($request, Closure $next, $privilege)
     {
-        if (Auth::user()->level == 'admin') {
+        $userLevel = Auth::user()->level;
+        if ($userLevel == 'admin') {
             return $next($request);
-        }else if(Auth::user()->level == $privilege){
+        } else if($userLevel == 'petugas' && ($privilege == 'petugas' || $privilege == 'anggota')){
+            return $next($request);
+        } else if($userLevel == 'anggota' && $privilege == 'anggota'){
             return $next($request);
         }
 
