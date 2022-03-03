@@ -2,13 +2,15 @@
 @section('content')
     <div class="row ">
         <div class="col-md-6 mt-4 mb-2">
-            <a class="btn btn-secondary btn-rounded" data-toggle="modal" data-target="#tambahBuku"> Tambah Buku</a>
+            @if(Auth::user()->level != 'anggota')
+                <a class="btn btn-secondary btn-rounded" data-toggle="modal" data-target="#tambahBuku"> Tambah Buku</a>
+            @endif
         </div>
         <div class="col-md-6 mt-4 mb-3 d-flex justify-content-end">
               <!-- Search form -->
               <form  action="{{ route('buku.search') }}" method="get" class="navbar-search navbar-search-light form-inline mr-sm-3 " id="navbar-search-main">
 
-                <input type="text" placeholder="masukkan pencarian" class="form-control bg-white @error('q') is-invalid @enderror" name="q" autocomplete="off" autofocus>
+                <input type="text" placeholder="masukkan pencarian" class="form-control bg-white @error('q') is-invalid @enderror" name="q" autocomplete="off" autofocus value="{{ $cari ?? '' }}">
                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
 
             </form>
@@ -28,7 +30,7 @@
                             <tr>
                                 <th>No</th>
                                 <th scope="col" class="sort" data-sort="Judul">Judul</th>
-                                <th scope="col" class="sort" data-sort="Penulis">Penulis</th>
+                                <th scope="col" class="sort" data-sort="Penulis">Pengarang</th>
                                 <th scope="col" class="sort" data-sort="Penerbit">Penerbit</th>
                                 <th scope="col" class="sort" data-sort="Tahun Terbit">Tahun Terbit</th>
                                 <th scope="col" class="sort" data-sort="Lokasi">Rak</th>
@@ -73,16 +75,16 @@
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                                 <button class="dropdown-item btn-detail" data-target="#detailBuku" data-toggle="modal" data-id="{{ $item->id }}" >Detail</button>
 
-                                                {{-- <button id="btnEdit{{ $item->id }}" class="dropdown-item btn-edit" data-toggle="modal" data-target="#editBuku" data-id="{{ $item->id }}">Edit</button> --}}
-                                                <a class="dropdown-item btn-edit" href="{{ route('buku.edit', $item->id) }}">Edit</a>
-
-                                                <form action="{{ route('buku.destroy', $item->id) }}" method="post"
-                                                    id="delete{{ $item->id }}">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button class="dropdown-item" type="button"
-                                                        onclick="deleteBuku({{ $item->id}})">Hapus</button>
-                                                </form>
+                                                @if(Auth::user()->level != 'anggota')
+                                                    <a class="dropdown-item btn-edit" href="{{ route('buku.edit', $item->id) }}">Edit</a>
+                                                    <form action="{{ route('buku.destroy', $item->id) }}" method="post"
+                                                        id="delete{{ $item->id }}">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button class="dropdown-item" type="button"
+                                                            onclick="deleteBuku({{ $item->id}})">Hapus</button>
+                                                    </form>
+                                                @endif
                                             </div>
                                         </div>
                                     </td>
