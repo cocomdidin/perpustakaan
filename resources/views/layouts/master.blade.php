@@ -49,7 +49,6 @@
 
                     <ul class="navbar-nav">
 
-
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}"
                                 href="{{ route('dashboard') }}">
@@ -58,56 +57,55 @@
                             </a>
                         </li>
 
-
                         @auth
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->is('buku') ? 'active' : '' }}"
+                                    href="{{ route('buku.index') }}">
+                                    <i class="ni ni-books text-green"></i>
+                                    <span class="nav-link-text">Buku</span>
+                                </a>
+                            </li>
 
-                        @if (Auth::user()->level == 'admin')
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('buku') ? 'active' : '' }}"
-                                href="{{ route('buku.index') }}">
-                                <i class="ni ni-books text-green"></i>
-                                <span class="nav-link-text">Buku</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('anggota') ? 'active' : '' }}"
-                                href="{{ route('anggota.index') }}">
-                                <i class="ni ni-single-02 text-orange"></i>
-                                <span class="nav-link-text">Anggota</span>
-                            </a>
-                        </li>
-                        @endif
-                        @if (Auth::user()->level == 'admin' || Auth::user()->level == 'user')
+                            @if (Auth::user()->level == 'admin')
+                                <li class="nav-item">
+                                    <a class="nav-link {{ request()->is('anggota') ? 'active' : '' }}"
+                                        href="{{ route('anggota.index') }}">
+                                        <i class="ni ni-single-02 text-orange"></i>
+                                        <span class="nav-link-text">Anggota</span>
+                                    </a>
+                                </li>
+                            @endif
 
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('kunjungan') ? 'active' : '' }}"
-                                href="{{ route('kunjungan.index') }}">
-                                <i class="ni ni-user-run text-red"></i>
-                                <span class="nav-link-text">Kunjungan</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('transaksi') ? 'active' : '' }}"
-                                href="{{ route('transaksi.index') }}">
-                                <i class="ni ni-ruler-pencil text-red"></i>
-                                <span class="nav-link-text">Transaksi</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('riwayat') ? 'active' : '' }}"
-                                href="{{ route('riwayat.index') }}">
-                                <i class="ni ni-support-16 text-purple"></i>
-                                <span class="nav-link-text">Riwayat</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('laporan') ? 'active' : '' }}"
-                                href="{{ route('laporan.index') }}">
-                                <i class="ni ni-single-copy-04 text-cyan"></i>
-                                <span class="nav-link-text">Laporan</span>
-                            </a>
-                        </li>
-                        @endif
+                            @if (Auth::user()->level == 'admin' || Auth::user()->level == 'petugas')
+                                <li class="nav-item">
+                                    <a class="nav-link {{ request()->is('kunjungan') ? 'active' : '' }}"
+                                        href="{{ route('kunjungan.index') }}">
+                                        <i class="ni ni-user-run text-red"></i>
+                                        <span class="nav-link-text">Kunjungan</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ request()->is('transaksi') ? 'active' : '' }}"
+                                        href="{{ route('transaksi.index') }}">
+                                        <i class="ni ni-ruler-pencil text-red"></i>
+                                        <span class="nav-link-text">Transaksi</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ request()->is('riwayat') ? 'active' : '' }}"
+                                        href="{{ route('riwayat.index') }}">
+                                        <i class="ni ni-support-16 text-purple"></i>
+                                        <span class="nav-link-text">Riwayat</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ request()->is('laporan') ? 'active' : '' }}"
+                                        href="{{ route('laporan.index') }}">
+                                        <i class="ni ni-single-copy-04 text-cyan"></i>
+                                        <span class="nav-link-text">Laporan</span>
+                                    </a>
+                                </li>
+                            @endif
                         @endauth
                     </ul>
 
