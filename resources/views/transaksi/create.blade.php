@@ -31,15 +31,15 @@
                 </div>
                 <div class="form-group">
                     <label>Tanggal Pinjam</label>
-                    <input type="date" name="tgl_pinjam"class="form-control" value="{{ old('tgl_pinjam') }}">
+                    <input type="date" id="tgl_pinjam" name="tgl_pinjam"class="form-control" value="{{ old('tgl_pinjam') ?? now()->format('Y-m-d') }}">
                     @error('tgl_pinjam')
                     <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label>Tanggal Kembali</label>
-                    <input type="date" name="tgl_kembali"class="form-control" value="{{ old('tgl_kembali') }}">
-                    @error('tgl_kembali')
+                    <label>Tgl Max Pinjam</label>
+                    <input type="date" id="tgl_max_pinjam" name="tgl_max_pinjam"class="form-control" value="{{ old('tgl_max_pinjam') ?? now()->addDays(2)->format('Y-m-d') }}">
+                    @error('tgl_max_pinjam')
                     <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
@@ -48,6 +48,7 @@
                     <textarea  name="ket"class="form-control" placeholder="optional" value = {{ old('ket') }}></textarea>
                 </div>
                 <div class="d-flex justify-content-between">
+                    <small class="text-primary">NB : Jika buku dikembalikan melebihi tanggal maksimal penjam maka akan terkena denda kelipatan stiap harinya</small>
                     <a class="btn btn-danger" href="{{ route('transaksi.index') }}">kembali</a>
                     <button type="submit" class="btn btn-primary">simpan</button>
                 </div>
@@ -58,3 +59,17 @@
 </div>
 @endsection
 
+
+@push('script')
+    <script>
+        $(document).ready(function () {
+
+            $('#tgl_pinjam').change(function (e) {
+                let tgl_pinjam = $(this).val();
+                let tgl_max_pinjam = new Date(tgl_pinjam);
+                tgl_max_pinjam.setDate(tgl_max_pinjam.getDate() + 2);
+                $('#tgl_max_pinjam').val(tgl_max_pinjam.toISOString().slice(0, 10));
+            });
+        });
+    </script>
+@endpush
