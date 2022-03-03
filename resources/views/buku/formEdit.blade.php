@@ -100,7 +100,7 @@
                             </div>
                         </div>
                         <div class="float-right">
-                            <button type="button" class="btn btn-danger" onclick="history.back()">Batal</button>
+                            <a href="{{ route('buku.index') }}" class="btn btn-danger" >Batal</a>
                             <button type="submit" class="btn btn-primary ">simpan</button>
                         </div>
                     </form>
