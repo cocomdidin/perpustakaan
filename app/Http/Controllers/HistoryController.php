@@ -16,7 +16,8 @@ class HistoryController extends Controller
     {
         return view('riwayat.index',[
             'title' => 'Riwayat Peminjaman',
-            'transaksi' => Transaksi::withTrashed()->orderBy('status','asc')->limit(3)->get()
+            'section' => 'riwayat',
+            'transaksi' => Transaksi::withTrashed()->orderBy('deleted_at','desc')->limit(10)->get()
         ]);
     }
 
@@ -90,10 +91,10 @@ class HistoryController extends Controller
 
         $data = [
             'title' => 'Riwayat Peminjaman',
-            'transaksi' => Transaksi::withTrashed()->orderBy('deleted_at','desc')->get()
-
+            'section' => 'all',
+            'transaksi' => Transaksi::withTrashed()->orderBy('id','desc')->get(),
         ];
-        
-        return view('riwayat.showall',$data);
+
+        return view('riwayat.index',$data);
     }
 }
