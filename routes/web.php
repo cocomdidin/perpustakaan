@@ -23,16 +23,13 @@ Auth::routes();
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
 Route::middleware('auth')->group(function(){
-    Route::middleware('privilege:admin')->group(function () {
-        Route::resource('/buku','BukuController');
-        Route::get('/buku-search','BukuController@search')->name('buku.search');
 
+    Route::middleware('privilege:admin')->group(function () {
         Route::resource('/anggota','AnggotaController');
         Route::get('/anggota-search','AnggotaController@search')->name('anggota.search');
-
     });
 
-    Route::middleware('privilege:user')->group(function () {
+    Route::middleware('privilege:petugas')->group(function () {
         Route::resource('/petugas','PetugasController');
 
         Route::get('/kunjungan','KunjunganController@index')->name('kunjungan.index');
@@ -52,5 +49,10 @@ Route::middleware('auth')->group(function(){
         Route::get('/buku-excel','LaporanController@bukuExcel')->name('buku.excel');
         Route::get('/transaksi-pdf','LaporanController@transaksiPdf')->name('transaksi.pdf');
         Route::get('/transaksi-excel','LaporanController@transaksiExcel')->name('transaksi.excel');
+    });
+
+    Route::middleware('privilege:anggota')->group(function () {
+        Route::resource('/buku','BukuController');
+        Route::get('/buku-search','BukuController@search')->name('buku.search');
     });
 });
