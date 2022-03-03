@@ -8,6 +8,7 @@ use App\Transaksi;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use PhpParser\Node\Stmt\TryCatch;
 
@@ -21,8 +22,9 @@ class TransaksiController extends Controller
     public function index()
     {
         $title = 'Daftar Transaksi';
+        $carbon = new \Carbon\Carbon();
         $transaksi = Transaksi::with('anggota','buku','user')->orderBy('created_at','desc')->paginate(6);
-        return view('transaksi.index',compact('title','transaksi'));
+        return view('transaksi.index',compact('title','transaksi','carbon'));
     }
 
     /**
@@ -126,19 +128,15 @@ class TransaksiController extends Controller
     {
         $message = ['required' => 'atribute tidak boleh kosong' ];
         $request->validate([
-            'tgl_pinjam' => 'required',
-            'tgl_kembali' => 'required',
+            'tgl_pinjam' => 'required|date',
+            'tgl_max_pinjam' => 'required|date',
         ],$message);
 
         //update transaksi
         $transaksi = Transaksi::find($id);
         $transaksi->update([
-            // 'anggota_id' => $anggota_id ?? $transaksi->anggota_id,
-            // 'kode_transaksi' => Str::random(10),
-            // 'buku_id' => $request->buku_id ?? $transaksi->buku_id,
             'tgl_pinjam' => $request->tgl_pinjam ?? $transaksi->tgl_pinjam,
-            'tgl_kembali' => $request->tgl_kembali ?? $transaksi->rgl_kembali,
-            // 'status' => $request->status ?? $transaksi->status,
+            'tgl_max_pinjam' => $request->tgl_max_pinjam ?? $transaksi->tgl_max_pinjam,
             'ket' => $request->ket ?? $transaksi->ket,
             'user_id' => Auth::user()->id
         ]);
@@ -191,23 +189,29 @@ class TransaksiController extends Controller
 
     public function kembalikan(Request $request, $id)
     {
-        $message = ['required' => 'atribute tidak boleh kosong' ];
-        $request->validate([
-            'tgl_kembali' => 'required',
-        ],$message);
-
         //update transaksi
         $transaksi = Transaksi::findOrFail($id);
-        $transaksi->update([
-            'tgl_kembali' => $request->tgl_kembali ?? $transaksi->rgl_kembali,
-            'status' => 'kembali',
-            'ket' => $request->ket ?? $transaksi->ket,
-            'user_id' => Auth::user()->id
-        ]);
+        $transaksi->tgl_kembali = date('Y-m-d');
+        try {
+            DB::beginTransaction();
 
-          //jika transaksi dilakukan maka stock buku akan berkurang
-          $transaksi->buku->where('id',$transaksi->buku_id)->update(['jumlah_buku' => $transaksi->buku->jumlah_buku +1]);
+            $transaksi->update([
+                'tgl_kembali' => $request->tgl_kembali ?? $transaksi->tgl_kembali,
+                'status' => 'kembali',
+                'jumlah_hari_telat' => $transaksi->terlambat,
+                'total_denda' => $transaksi->denda,
+                'ket' => $request->ket ?? $transaksi->ket,
+                'user_id' => Auth::user()->id
+            ]);
 
-        return redirect('transaksi')->with('success','Buku berhasil dikembalikan');
+            //jika transaksi dilakukan maka stock buku akan berkurang
+            $transaksi->buku->where('id',$transaksi->buku_id)->update(['jumlah_buku' => $transaksi->buku->jumlah_buku +1]);
+
+            DB::commit();
+            return redirect('transaksi')->with('success','Buku berhasil dikembalikan');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect('transaksi')->with('fail','Buku gagal dikembalikan');
+        }
     }
 }
