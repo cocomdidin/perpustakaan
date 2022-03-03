@@ -14,15 +14,23 @@ class DashboardController extends Controller
 {
     public function index()
     {
-
-
         //chart berdasarkan jenis kelamin
-        $jenis_kelamin =  Anggota::select('jenis_kelamin',DB::raw('count(transaksi.id) as total'))
-            ->join('transaksi','transaksi.anggota_id','anggota.id')
-            ->whereYear('tgl_pinjam', Carbon::now()->year)
-            ->groupBy('jenis_kelamin')
+        $pemninjam = Transaksi::select('anggota_id')->whereYear('tgl_pinjam', Carbon::now()->year)->distinct();
+
+        $kelamin_peminjam = Anggota::joinSub($pemninjam, 'peminjam', function ($join) {
+                $join->on('anggota.id', '=', 'peminjam.anggota_id');
+            })
+            ->groupBy('anggota.jenis_kelamin')
+            ->select('anggota.jenis_kelamin', DB::raw('count(anggota.id) as total'))
             ->get()
         ;
+
+        // $jenis_kelamin =  Anggota::select('jenis_kelamin',DB::raw('count(transaksi.id) as total'))
+        //     ->join('transaksi','transaksi.anggota_id','anggota.id')
+        //     ->whereYear('tgl_pinjam', Carbon::now()->year)
+        //     ->groupBy('jenis_kelamin')
+        //     ->get()
+        // ;
 
         //chart berdasarkan pinjam dan kembali
         $transaksi_pinjam = Transaksi::withTrashed()
@@ -38,16 +46,12 @@ class DashboardController extends Controller
             ->get()
         ;
 
-        // $list_bulan = $transaksi_pinjam->pluck('bulan')->toJson();
-        // $list_pinjam = $transaksi_pinjam->pluck('pinjam')->toJson();
-        // $list_kembali = $transaksi_pinjam->pluck('kembali')->toJson();
-
         $data = [
            'buku' =>  Buku::count(),
            'anggota' => Anggota::count(),
            'transaksi' => Transaksi::count(),
            'riwayat' => Transaksi::withTrashed()->count(),
-           'jenis_kelamin' => $jenis_kelamin,
+           'jenis_kelamin' => $kelamin_peminjam,
            'transaksi_pinjam' => $transaksi_pinjam,
 
         ];
