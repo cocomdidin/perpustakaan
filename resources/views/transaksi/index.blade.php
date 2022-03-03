@@ -30,13 +30,13 @@
                         <table class="table align-items-center table-flush" style="min-height: 166px;">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col" class="sort" data-sort="Nama">Nama</th>
-                                    <th scope="col" class="sort" data-sort="Nim">No Anggota</th>
-                                    <th scope="col" class="sort" data-sort="Kode Transaksi">Kode Transaksi</th>
-                                    <th scope="col" class="sort" data-sort="Judul">Judul Buku</th>
-                                    <th scope="col" class="sort" data-sort="Tanggal Pinjam">Tanggal Pinjam</th>
-                                    <th scope="col" class="sort" data-sort="Tanggal Kembali">Tanggal Kembali</th>
-                                    <th scope="col" class="sort" data-sort="Status">Status</th>
+                                    <th scope="col">Nama</th>
+                                    <th scope="col">No Anggota</th>
+                                    <th scope="col">Kode Transaksi</th>
+                                    <th scope="col">Judul Buku</th>
+                                    <th scope="col">Tanggal Pinjam</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Terlambat</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -60,21 +60,26 @@
 
                                         </td>
                                         <td>{{ $item->buku->judul }}</td>
-                                        <td>{{ $item->tgl_pinjam }}</td>
-                                        <td>{{ $item->tgl_kembali }}</td>
+                                        <td>{{ $item->tgl_pinjam }} <span class="text-muted">s/d</span> {{ $item->tgl_max_pinjam }}</td>
                                         <td>
                                             @if ($item->status == 'pinjam')
                                                 <span class="badge badge-dot mr-4">
                                                     <i class="bg-danger"></i>
-                                                    <span>{{ $item->status }}</span>
+                                                    <span class="text-capitalize">{{ $item->status }}</span>
                                                 </span>
                                             @else
                                                 <span class="badge badge-dot mr-4">
                                                     <i class="bg-success"></i>
-                                                    <span>{{ $item->status }}</span>
+                                                    <small class="text-capitalize">{{ $item->status }}</small>
                                                 </span>
+                                                <div>{{ $item->tgl_kembali }}</div>
                                             @endif
-
+                                        </td>
+                                        <td>
+                                            <div>{{ $item->terlambat }} hari</div>
+                                            @if ($item->terlambat > 0)
+                                                <small class="text-danger">Rp. {{ number_format($item->denda, 0, ',', '.') }}</small>
+                                            @endif
                                         </td>
 
                                         <td class="text-right">
@@ -98,7 +103,7 @@
                                                             @csrf
                                                             @method('delete')
                                                                 <button class="dropdown-item" type="button"
-                                                                onclick="deleteTransaksi({{ $item->id}})">Hapus</button>
+                                                                onclick="deleteTransaksi({{ $item->id}})">Arsipkan</button>
                                                         </form>
                                                     @endif
                                                 </div>
@@ -265,8 +270,6 @@
             })
         }
         $(document).ready(function(){
-
-
 
             //session success dan berhasil hapus
             let success =  $('.success').data('flash');
