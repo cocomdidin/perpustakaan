@@ -155,36 +155,43 @@
                             <label for="">Nama</label>
                             <input type="text" name="nama"  class="form-control" value="{{ old('nama') }}">
                             @error('nama')
-                                <span class="text-danger">{{ $message }}</span>
+                                <small class="text-danger">{{ $message }}</small>
                             @enderror
 
                         </div>
                         <div class="form-group">
-                            <label for="">Nim</label>
+                            <label for="">No Anggota</label>
                             <input type="text"  name="nim"  class="form-control" value="{{ old('nim') }}" autocomplete="off">
                             @error('nim')
-                                <span class="text-danger">{{ $message }}</span>
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="">Email</label>
+                            <input type="email"  name="email"  class="form-control" value="{{ old('email') }}" autocomplete="off">
+                            @error('email')
+                                <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="">No HP</label>
                             <input type="number" min="0" name="no_hp"  class="form-control" value="{{ old('no_hp') }}">
                             @error('no_hp')
-                                <span class="text-danger">{{ $message }}</span>
+                                <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="">Tanggal Lahir</label>
                             <input type="date" name="tgl_lahir"  class="form-control" value="{{ old('tgl_lahir') }}">
                             @error('tgl_lahir')
-                                <span class="text-danger">{{ $message }}</span>
+                                <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="">Kelas</label>
                             <input type="text" name="jurusan"  class="form-control" value="{{ old('jurusan') }}">
                             @error('jurusan')
-                                <span class="text-danger">{{ $message }}</span>
+                                <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="form-group">
@@ -195,19 +202,7 @@
                                     <option @if(old('jenis_kelamin')=='wanita') selected @endif value="wanita">Wanita</option>
                             </select>
                             @error('jenis_kelamin')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="">Petugas</label>
-                            <select name="user_id" class="form-control">
-                                <option disabled selected>-- Pilih Petugas --</option>
-                                @foreach ($users as $item)
-                                <option @if(old('user_id')==$item->id) selected @endif value="{{ $item->id }}"> {{  $item->level }}</option>
-                                @endforeach
-                            </select>
-                            @error('user_id')
-                                <span class="text-danger">{{ $message }}</span>
+                                <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="float-right">
@@ -277,6 +272,9 @@
 
 
         $(document).ready(function(){
+            @if($errors->any())
+                    $('#tambahAnggota').modal('show');
+            @endif
 
             //detail anggota
             $('.btn-detail').click(function(){
