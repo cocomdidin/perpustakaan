@@ -49,14 +49,16 @@ class TransaksiController extends Controller
     public function store(Request $request)
     {
         $message = [
-            'required' => 'atribute tidak boleh kosong',
+            'required' => 'Tidak boleh kosong',
             'exists' => 'Nomor tidak terdaftar',
+            'date' => 'Format tanggal salah',
+            'after_or_equal' => 'Tanggal harus lebih besar dari tanggal pinjam',
         ];
         $request->validate([
             'nim' => 'required|exists:anggota,nim',
             'buku_id' => 'required',
-            'tgl_pinjam' => 'required',
-            'tgl_kembali' => 'required',
+            'tgl_pinjam' => 'required|date',
+            'tgl_max_pinjam' => 'required|date|after_or_equal:tgl_pinjam',
         ],$message);
 
         //ambil anggota id
@@ -76,7 +78,7 @@ class TransaksiController extends Controller
             'kode_transaksi' => Str::random(10),
             'buku_id' => $request->buku_id,
             'tgl_pinjam' => $request->tgl_pinjam,
-            'tgl_kembali' => $request->tgl_kembali,
+            'tgl_max_pinjam' => $request->tgl_max_pinjam,
             'status' => 'pinjam',
             'ket' => $request->ket,
             'user_id' => Auth::user()->id
@@ -160,24 +162,23 @@ class TransaksiController extends Controller
     }
 
     public function search(Request $request){
-
-
         $title = 'Daftar Transaksi';
 
-
-
-        // $request->validate([
-        //     'q' => 'required'
-        // ]);
         //cari dengan kode_transaksi
         $cari = $request->input('q');
             if ($cari) {
-                $transaksi = Transaksi::where('kode_transaksi','LIKE',"%$cari%")->paginate();
+                $transaksi = Transaksi::join('anggota','anggota.id','=','transaksi.anggota_id')
+                ->join('buku','buku.id','=','transaksi.buku_id')
+                ->where('transaksi.kode_transaksi','LIKE',"%$cari%")
+                ->orWhere('buku.judul','LIKE',"%$cari%")
+                ->orWhere('anggota.nama','LIKE',"%$cari%")
+                ->orWhere('anggota.nim','LIKE',"%$cari%")
+                ->paginate();
             } else {
                 $transaksi = Transaksi::paginate();
             }
 
-        return view('transaksi.index',compact('title','transaksi'));
+        return view('transaksi.index',compact('title','transaksi','cari'));
 
     }
 
