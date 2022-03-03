@@ -29,9 +29,9 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label>Tanggal Kembali</label>
-                    <input type="date" name="tgl_kembali"class="form-control" value="{{ $transaksi->tgl_kembali }}">
-                    @error('tgl_kembali')
+                    <label>Tgl Max Pinjam</label>
+                    <input type="date" name="tgl_max_pinjam"class="form-control" value="{{ $transaksi->tgl_max_pinjam }}">
+                    @error('tgl_max_pinjam')
                     <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
