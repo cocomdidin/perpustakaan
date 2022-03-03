@@ -9,7 +9,7 @@
             <!-- Search form -->
             <form  action="{{ route('transaksi.search') }}" method="get" class="navbar-search navbar-search-light form-inline mr-sm-3 " id="navbar-search-main">
 
-              <input type="text" placeholder="masukkan kode transaksi" class="form-control bg-white @error('q') is-invalid @enderror" name="q" autocomplete="off" autofocus>
+              <input type="text" placeholder="masukkan pencarian" class="form-control bg-white @error('q') is-invalid @enderror" name="q" autocomplete="off" autofocus value="{{ $cari ?? '' }}">
              <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
 
           </form>
@@ -33,6 +33,7 @@
                                     <th scope="col" class="sort" data-sort="Nama">Nama</th>
                                     <th scope="col" class="sort" data-sort="Nim">No Anggota</th>
                                     <th scope="col" class="sort" data-sort="Kode Transaksi">Kode Transaksi</th>
+                                    <th scope="col" class="sort" data-sort="Judul">Judul Buku</th>
                                     <th scope="col" class="sort" data-sort="Tanggal Pinjam">Tanggal Pinjam</th>
                                     <th scope="col" class="sort" data-sort="Tanggal Kembali">Tanggal Kembali</th>
                                     <th scope="col" class="sort" data-sort="Status">Status</th>
@@ -58,12 +59,9 @@
                                                 <span class="status">{{ $item->kode_transaksi }}</span>
 
                                         </td>
-                                        <td>
-                                            {{ $item->tgl_pinjam }}
-                                        </td>
-                                        <td>
-                                            {{ $item->tgl_kembali }}
-                                        </td>
+                                        <td>{{ $item->buku->judul }}</td>
+                                        <td>{{ $item->tgl_pinjam }}</td>
+                                        <td>{{ $item->tgl_kembali }}</td>
                                         <td>
                                             @if ($item->status == 'pinjam')
                                                 <span class="badge badge-dot mr-4">
