@@ -15,6 +15,7 @@ class BukuSeeder extends Seeder
     {
         Buku::insert([
             [
+                'kode' => '001',
                 'judul' => 'Naruto Shippuden',
                 'isbn' => '9983742831',
                 'penulis' => 'Masashi Kisimoto',
@@ -26,6 +27,7 @@ class BukuSeeder extends Seeder
                 'created_at' => Carbon::now()
             ],
             [
+                'kode' => '002',
                 'judul' => 'One Piece',
                 'isbn' => '9983723423',
                 'penulis' => 'Eichiiro Oda',
